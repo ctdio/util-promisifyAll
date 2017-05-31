@@ -1,0 +1,29 @@
+{
+  "name": "util-promisifyall",
+  "version": "1.0.0",
+  "description": "promisifyAll with node's native promisify function",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/charlieduong94/util-promisifyall.git"
+  },
+  "keywords": [
+    "promisify"
+  ],
+  "author": "Charlie Duong",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/charlieduong94/util-promisifyall/issues"
+  },
+  "homepage": "https://github.com/charlieduong94/util-promisifyall#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "mocha": "^3.4.2"
+  }
+}
