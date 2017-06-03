@@ -9,7 +9,6 @@ function _promisifyAllFunctions (object) {
   }
 }
 
-
 module.exports = function (object) {
   _promisifyAllFunctions(object)
 
