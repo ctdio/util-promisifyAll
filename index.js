@@ -2,9 +2,13 @@ const { promisify } = require('util')
 
 function _promisifyAllFunctions (object) {
   for (const key of Object.getOwnPropertyNames(object)) {
-    const func = object[key]
-    if (typeof func === 'function') {
-      object[`${key}Async`] = promisify(func)
+    const descriptor = Object.getOwnPropertyDescriptor(object, key)
+
+    if (!descriptor.get) {
+      const func = object[key]
+      if (typeof func === 'function') {
+        object[`${key}Async`] = promisify(func)
+      }
     }
   }
 }

@@ -1,4 +1,5 @@
 const assert = require('assert')
+const Redis = require('redis')
 
 const promisifyAll = require('../index')
 
@@ -28,7 +29,7 @@ describe('promisifyAll', () => {
         callback(null, input)
       }
     }
-    _testPromisification(object)
+    await _testPromisification(object)
   })
 
   it('should promisify all functions defined on an object\'s prototype', async () => {
@@ -42,6 +43,53 @@ describe('promisifyAll', () => {
     }
 
     const object = new MyClass()
-    _testPromisification(object)
+    await _testPromisification(object)
+  })
+
+  context('when directly promisifing a prototype', () => {
+    it('should all functions defined on an object\'s prototype', async () => {
+      class MyClass {
+        someFunc (input, callback) {
+          callback(null, input)
+        }
+      }
+
+      promisifyAll(MyClass.prototype)
+      const instance = new MyClass()
+      const input = 'input'
+      const result = await instance.someFuncAsync(input)
+
+      assert(result === input, 'result should match input')
+    })
+  })
+
+  context('objects with function getters', () => {
+    const propertyName = 'someProperty'
+    let testObject
+
+    beforeEach(() => {
+      testObject = {
+        someOtherProperty: false,
+
+        someFunc (input, callback) {
+          callback(null, input)
+        }
+      }
+
+      Object.defineProperty(testObject, propertyName, {
+        get: function () {
+          throw new Error('Should not triggered')
+        }
+      })
+    })
+
+    it('should be able to promisify objects that contain properties with ' +
+    'getter functions', async () => {
+      promisifyAll(testObject)
+
+      const input = 'input'
+      const result = await testObject.someFuncAsync(input)
+      assert(result === input, 'result should match input')
+    })
   })
 })
