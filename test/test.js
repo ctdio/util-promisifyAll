@@ -45,6 +45,27 @@ describe('promisifyAll', () => {
     await _testPromisification(object)
   })
 
+  it('should not promisify any functions on the default object prototype', () => {
+    class MyClass {
+      someFunc (input, callback) {
+        callback(null, input)
+      }
+      someOtherFunc (input, callback) {
+        callback(null, input)
+      }
+    }
+
+    const NewClass = promisifyAll(MyClass.prototype)
+
+    const propertyNames = Object.getOwnPropertyNames(Object.prototype)
+
+    for (const key in Object.getPrototypeOf(NewClass)) {
+      const asyncName = key + 'Async'
+      assert(propertyNames.indexOf(asyncName) === -1,
+        `Error: class prototype should not contain ${asyncName}`)
+    }
+  })
+
   context('when directly promisifing a prototype', () => {
     it('should all functions defined on an object\'s prototype', async () => {
       class MyClass {
