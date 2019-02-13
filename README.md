@@ -10,11 +10,11 @@ npm i util-promisifyall
 ```
 
 ### Example Usage
-This library wraps a any callback-based library and attempts to promisify
-any function available on the module's export or its prototype.
+This library wraps any traditional callback-based library and attempts
+to promisify any function exported by the module or its prototype.
 
-It creates and exposes a "promisified" version of each function, which can
-then be invoked by appending `Async` to the old function name, such as:
+It does so by creating and exposing a "promisified" version of each function,
+which can then be invoked by appending `Async` to the old function name, such as:
 
 ```
 const promisifyAll = require('util-promisifyall'); // note lowercase 'a' in 'all'
@@ -22,8 +22,9 @@ const fs = promisifyAll(require('fs'));
 
 const readDir = async (dir) => {
   try {
-    const res = fs.readdirAsync(dir);
+    const res = await fs.readdirAsync(dir);
     console.log(res);
+    return res;
   } catch (error) {
     throw error;
   }
