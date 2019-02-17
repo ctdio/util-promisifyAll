@@ -1,6 +1,6 @@
 {
   "name": "util-promisifyall",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "promisifyAll with node's native promisify function",
   "main": "index.js",
   "directories": {
