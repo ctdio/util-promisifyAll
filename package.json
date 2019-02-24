@@ -25,8 +25,8 @@
   "homepage": "https://github.com/charlieduong94/util-promisifyall#readme",
   "dependencies": {},
   "devDependencies": {
-    "coveralls": "^2.13.1",
-    "mocha": "^3.4.2",
-    "nyc": "^11.0.2"
+    "coveralls": "^3.0.3",
+    "mocha": "^6.0.1",
+    "nyc": "^13.3.0"
   }
 }

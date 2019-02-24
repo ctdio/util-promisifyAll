@@ -1,5 +1,7 @@
 # util-promisifyAll
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/charlieduong94/util-promisifyAll.svg)](https://greenkeeper.io/)
+
 `bluebird`'s `promisifyAll` implemented with node 8.x's builtin `util.promisify`. For those
 times when you don't want to pull in all of `bluebird` just to promisify some functions.
 
